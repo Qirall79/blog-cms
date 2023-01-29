@@ -1,10 +1,10 @@
 /* eslint-disable react/style-prop-object */
-import { useState, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Navigate } from "react-router-dom";
 
-const PostForm = () => {
+const PostForm = (props) => {
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [response, setResponse] = useState({
     success: true,
@@ -25,7 +25,31 @@ const PostForm = () => {
         setResponse(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        setResponse({
+          success: false,
+          errors: err.response.data.errors,
+          post: err.response.data.post,
+        });
+      });
+  };
+
+  const sendUpdateData = (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    axios
+      .put(
+        "http://localhost:5000/posts/" + props.oldDetails._id,
+        formData,
+        config
+      )
+      .then((response) => {
+        setResponse(response.data);
+      })
+      .catch((err) => {
         setResponse({
           success: false,
           errors: err.response.data.errors,
@@ -37,7 +61,6 @@ const PostForm = () => {
   const updateFormData = (e) => {
     const target = e.target.getAttribute("name");
     const value = e.target.value;
-
     if (target === "title") {
       setFormData({ ...formData, title: value });
       setResponse({ ...response, post: { ...response.post, title: value } });
@@ -48,11 +71,35 @@ const PostForm = () => {
     }
     return;
   };
+
+  useEffect(() => {
+    const fillDetails = () => {
+      if (props.update) {
+        setFormData(props.oldDetails);
+      }
+      return;
+    };
+
+    fillDetails();
+  }, []);
+
+  if (response.success && response.post._id) {
+    return (
+      <div>
+        <Navigate replace to="/" />
+        Updated successfully
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
       <div className="w-full px-48 py-24">
-        <form method="post" className="w-full flex-col gap-20">
+        <form
+          method={props.update ? "put" : "post"}
+          className="w-full flex-col gap-20"
+        >
           <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
             <label htmlFor="title" className="mr-10 font-medium ">
               Title
@@ -64,7 +111,11 @@ const PostForm = () => {
               onChange={updateFormData}
               className="border  px-2 py-1 text-sm w-3/4"
               value={
-                response.success && response.post._id ? "" : response.post.title
+                props.update
+                  ? formData.title
+                  : response.success && response.post._id
+                  ? ""
+                  : response.post.title
               }
             />
           </div>
@@ -80,7 +131,9 @@ const PostForm = () => {
               cols="50"
               rows="5"
               value={
-                response.success && response.post._id
+                props.update
+                  ? formData.content
+                  : response.success && response.post._id
                   ? ""
                   : response.post.content
               }
@@ -92,17 +145,13 @@ const PostForm = () => {
           <input
             type="submit"
             value="Post"
-            onClick={sendData}
+            onClick={props.update ? sendUpdateData : sendData}
             className="px-8 py-2 bg-emerald-500 rounded-md cursor-pointer font-medium"
           />
         </form>
         <div className="text-red-500 mt-5">
-          {response.success ? (
-            response.post._id ? (
-              <Navigate replace to={"/posts/" + response.post._id} />
-            ) : (
-              ""
-            )
+          {response.success && response.post._id ? (
+            <Navigate replace to={"/posts/" + response.post._id} />
           ) : (
             response.errors.map((err) => {
               return <p>- {err.msg}</p>;

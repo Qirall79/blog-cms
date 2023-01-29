@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Comment from "./Comment";
+import PostForm from "./PostForm";
+
+import fetchUser from "../helper/fetchUser";
 
 const PostDetails = (props) => {
   const [post, setPost] = useState({ details: {}, comments: {} });
   const [response, setResponse] = useState({ success: true });
+  const [update, setUpdate] = useState(false);
+  const [user, setUser] = useState({});
   const params = useParams();
 
   const fetchPost = () => {
@@ -22,14 +27,22 @@ const PostDetails = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
+  const showUpdateForm = () => {
+    setUpdate(true);
+  };
   useEffect(() => {
+    fetchUser(user, setUser);
     fetchPost();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      {!response.success ? (
+      {update ? (
+        <PostForm oldDetails={post.details} update={true} />
+      ) : !response.success ? (
         <h3>Post not found</h3>
       ) : !post.details._id ? (
         ""
@@ -41,6 +54,12 @@ const PostDetails = (props) => {
           <h4>Author: {post.details.author.first_name}</h4>
           <h4>Timestamp: {post.details.timestamp}</h4>
 
+          {user.isAuthenticated &&
+          user.userDetails._id === post.details.author._id ? (
+            <button onClick={showUpdateForm}>Update Post</button>
+          ) : (
+            ""
+          )}
           <hr />
 
           <h2>Comments</h2>
