@@ -4,12 +4,14 @@ import "./App.css";
 import Post from "./components/Post";
 import Navbar from "./components/Navbar";
 
+import url from "./apiLink";
+
 function App() {
   const [posts, setPosts] = useState({ success: false, posts: [] });
 
   const fetchPosts = () => {
     axios
-      .get("http://localhost:5000/posts")
+      .get(url + "/posts")
       .then((response) => {
         setPosts({
           success: response.data.success,

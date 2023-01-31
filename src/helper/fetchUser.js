@@ -1,8 +1,9 @@
 import axios from "axios";
+import url from "../apiLink";
 
 const fetchUser = (user, setUser) => {
   axios
-    .get("http://localhost:5000/user", {
+    .get(url + "/user", {
       headers: {
         Authorization: localStorage.getItem("token"),
       },

@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Navigate } from "react-router-dom";
+import url from "../apiLink";
 
 const PostForm = (props) => {
   const [formData, setFormData] = useState({ title: "", content: "" });
@@ -20,7 +21,7 @@ const PostForm = (props) => {
       },
     };
     axios
-      .post("http://localhost:5000/posts", formData, config)
+      .post(url + "/posts", formData, config)
       .then((response) => {
         setResponse(response.data);
       })
@@ -41,11 +42,7 @@ const PostForm = (props) => {
       },
     };
     axios
-      .put(
-        "http://localhost:5000/posts/" + props.oldDetails._id,
-        formData,
-        config
-      )
+      .put(url + "/posts/" + props.oldDetails._id, formData, config)
       .then((response) => {
         setResponse(response.data);
       })

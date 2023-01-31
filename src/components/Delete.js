@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import url from "../apiLink";
 
 const Delete = (props) => {
   const params = useParams();
@@ -14,7 +15,7 @@ const Delete = (props) => {
   const deletePost = (e) => {
     e.preventDefault();
     axios
-      .delete("http://localhost:5000/posts/" + params.postId, config)
+      .delete(url + "/posts/" + params.postId, config)
       .then(() => {
         setDeleted(true);
       })

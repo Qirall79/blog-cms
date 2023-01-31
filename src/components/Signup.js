@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Navigate } from "react-router-dom";
+import url from "../apiLink";
 
 const Signup = () => {
   const [response, setResponse] = useState({
@@ -21,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     localStorage.removeItem("token");
     axios
-      .post("http://localhost:5000/signup", formData)
+      .post(url + "/signup", formData)
       .then((response) => {
         console.log(response.data);
         setResponse(response.data);

@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import fetchUser from "../helper/fetchUser";
+import url from "../apiLink";
 
 const CommentForm = (props) => {
   const params = useParams();
@@ -19,7 +19,7 @@ const CommentForm = (props) => {
   const postComment = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/posts/" + params.postId, { text }, config)
+      .post(url + "/posts/" + params.postId, { text }, config)
       .then((response) => {
         props.addComment();
       })

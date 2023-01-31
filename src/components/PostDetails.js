@@ -10,6 +10,7 @@ import PostForm from "./PostForm";
 import fetchUser from "../helper/fetchUser";
 import CommentForm from "./CommentForm";
 import Delete from "./Delete";
+import url from "../apiLink";
 
 const PostDetails = (props) => {
   const [post, setPost] = useState({ details: {}, comments: {} });
@@ -22,7 +23,7 @@ const PostDetails = (props) => {
 
   const fetchPost = () => {
     axios
-      .get("http://localhost:5000/posts/" + params.postId)
+      .get(url + "/posts/" + params.postId)
       .then((response) => {
         setResponse(response.data);
         setPost({

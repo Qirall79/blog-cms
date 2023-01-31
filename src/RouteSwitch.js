@@ -1,7 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 import App from "./App";
 import PostDetails from "./components/PostDetails";
 import Login from "./components/Login";
@@ -14,6 +11,7 @@ const RouteSwitch = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/posts" element={<App />} />
         <Route path="/create" element={<PostForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

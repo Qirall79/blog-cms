@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import url from "../apiLink";
 import fetchUser from "../helper/fetchUser";
 import Navbar from "./Navbar";
 
@@ -31,7 +32,7 @@ const Login = () => {
       },
     };
     axios
-      .post("http://localhost:5000/login", formData, config)
+      .post(url + "/login", formData, config)
       .then((response) => {
         setResponse(response.data);
         setUser({
