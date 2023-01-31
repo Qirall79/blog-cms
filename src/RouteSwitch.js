@@ -8,7 +8,7 @@ import Signup from "./components/Signup";
 
 const RouteSwitch = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/blog-cms">
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/posts" element={<App />} />
