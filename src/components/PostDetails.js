@@ -64,7 +64,7 @@ const PostDetails = (props) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className={"flex flex-col" + update ? "items-start" : "items-center"}>
       <Navbar />
       {update ? (
         <PostForm oldDetails={post.details} update={true} />
@@ -75,13 +75,15 @@ const PostDetails = (props) => {
       ) : (
         <div
           id="post-detail"
-          className="w-full px-48 py-10 flex flex-col gap-5"
+          className="w-full px-5 md:px-12 lg:px-28 py-10 flex flex-col gap-5"
         >
-          <div className="w-full p-10 flex flex-col items-center self-center gap-5 text-center">
-            <h2 className="text-4xl font-semibold capitalize mb-10">
+          <div className="w-full p-10 flex flex-col self-center gap-5 text-center items-center">
+            <h2 className="text-3xl lg:text-4xl font-semibold capitalize mb-10">
               {post.details.title}
             </h2>
-            <p className="mb-7 text-lg">{post.details.content}</p>
+            <p className="mb-7 text-md lg:text-lg max-w-[900px]">
+              {post.details.content}
+            </p>
             <h4>
               By:{" "}
               <span className="font-medium capitalize text-cyan-600">
@@ -123,7 +125,7 @@ const PostDetails = (props) => {
           </div>
 
           <br />
-          <div className="px-48 flex flex-col gap-8">
+          <div className="px-0 md:px-10 lg:px-16 flex flex-col gap-8">
             <h2 className="font-semibold text-xl text-cyan-500">Comments</h2>
             <div className="pl-10 flex flex-col gap-10">
               {post.comments.length

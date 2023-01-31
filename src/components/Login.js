@@ -10,7 +10,7 @@ const Login = () => {
 
   // Get current user if exists
   const [user, setUser] = useState({
-    isAuthenticated: true,
+    isAuthenticated: false,
     userDetails: null,
   });
 
@@ -83,9 +83,9 @@ const Login = () => {
   return (
     <div>
       <Navbar />
-      <div className="w-full px-48 py-24">
+      <div className="w-full px-20 md:px-28 lg:px-48 py-24">
         <form method="post" className="w-full flex-col gap-20">
-          <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="email" className="mr-10 font-medium ">
               Email:{" "}
             </label>
@@ -97,7 +97,7 @@ const Login = () => {
               className="border  px-2 py-1 text-sm w-3/4"
             />
           </div>
-          <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="password" className="mr-10 font-medium ">
               Password:{" "}
             </label>

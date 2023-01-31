@@ -26,7 +26,10 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div id="posts" className="w-full px-48 py-24 grid grid-cols-4 gap-16">
+      <div
+        id="posts"
+        className="w-full px-20 md:px-28 lg:px-48 py-24 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-16"
+      >
         {!posts.success
           ? !posts.posts.length
             ? ""

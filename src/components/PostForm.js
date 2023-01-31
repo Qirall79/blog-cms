@@ -93,68 +93,71 @@ const PostForm = (props) => {
   }
 
   return (
-    <div className="w-full px-48 py-24">
-      <form
-        method={props.update ? "put" : "post"}
-        className="w-full flex-col gap-20"
-      >
-        <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
-          <label htmlFor="title" className="mr-10 font-medium ">
-            Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            onChange={updateFormData}
-            className="border  px-2 py-1 text-sm w-3/4"
-            value={
-              props.update
-                ? formData.title
-                : response.success && response.post._id
-                ? ""
-                : response.post.title
-            }
-          />
-        </div>
-        <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
-          <label htmlFor="content" className="mr-10 font-medium ">
-            Content
-          </label>
-          <textarea
-            name="content"
-            id="content"
-            onChange={updateFormData}
-            className="border  px-2 py-1 text-sm w-3/4"
-            cols="50"
-            rows="5"
-            value={
-              props.update
-                ? formData.content
-                : response.success && response.post._id
-                ? ""
-                : response.post.content
-            }
-          >
-            {" "}
-          </textarea>
-        </div>
+    <div>
+      {props.update ? "" : <Navbar />}
+      <div className="w-full px-20 md:px-28 lg:px-48 py-24">
+        <form
+          method={props.update ? "put" : "post"}
+          className="w-full flex-col gap-20"
+        >
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
+            <label htmlFor="title" className="mr-10 font-medium ">
+              Title
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              onChange={updateFormData}
+              className="border  px-2 py-1 text-sm w-3/4"
+              value={
+                props.update
+                  ? formData.title
+                  : response.success && response.post._id
+                  ? ""
+                  : response.post.title
+              }
+            />
+          </div>
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
+            <label htmlFor="content" className="mr-10 font-medium ">
+              Content
+            </label>
+            <textarea
+              name="content"
+              id="content"
+              onChange={updateFormData}
+              className="border  px-2 py-1 text-sm w-3/4"
+              cols="50"
+              rows="5"
+              value={
+                props.update
+                  ? formData.content
+                  : response.success && response.post._id
+                  ? ""
+                  : response.post.content
+              }
+            >
+              {" "}
+            </textarea>
+          </div>
 
-        <input
-          type="submit"
-          value="Post"
-          onClick={props.update ? sendUpdateData : sendData}
-          className="px-8 py-2 bg-emerald-500 rounded-md cursor-pointer font-medium"
-        />
-      </form>
-      <div className="text-red-500 mt-5">
-        {response.success && response.post._id ? (
-          <Navigate replace to={"/posts/" + response.post._id} />
-        ) : (
-          response.errors.map((err) => {
-            return <p>- {err.msg}</p>;
-          })
-        )}
+          <input
+            type="submit"
+            value="Post"
+            onClick={props.update ? sendUpdateData : sendData}
+            className="px-8 py-2 bg-emerald-500 rounded-md cursor-pointer font-medium"
+          />
+        </form>
+        <div className="text-red-500 mt-5">
+          {response.success && response.post._id ? (
+            <Navigate replace to={"/posts/" + response.post._id} />
+          ) : (
+            response.errors.map((err) => {
+              return <p>- {err.msg}</p>;
+            })
+          )}
+        </div>
       </div>
     </div>
   );

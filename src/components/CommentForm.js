@@ -31,7 +31,7 @@ const CommentForm = (props) => {
   return (
     <div>
       <form method="post">
-        <div className="form-group mb-5 w-2/3 max-w-[600px] flex justify-between">
+        <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
           <label htmlFor="text">Comment</label>
           <input
             type="text"

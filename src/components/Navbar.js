@@ -5,7 +5,7 @@ import fetchUser from "../helper/fetchUser";
 const Navbar = () => {
   // Get current user if exists
   const [user, setUser] = useState({
-    isAuthenticated: true,
+    isAuthenticated: false,
     userDetails: null,
   });
 
@@ -15,9 +15,9 @@ const Navbar = () => {
 
   if (user.isAuthenticated) {
     return (
-      <div className="w-full bg-cyan-700 h-48 flex px-48  items-center justify-between">
-        <h1 className="text-5xl font-semibold">Walid's Blog</h1>
-        <ul className="flex items-center gap-20 text-lg font-medium">
+      <div className="w-full bg-cyan-700 h-48 flex px-24 lg:px-48 py-10 lg:py-0 flex-col lg:flex-row  items-center justify-between">
+        <h1 className=" text-4xl lg:text-5xl font-semibold">Walid's Blog</h1>
+        <ul className="flex items-center gap-10 md:gap-20 text-md md:text-lg font-medium">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -33,9 +33,9 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full bg-cyan-700 h-48 flex px-48  items-center justify-between">
-      <h1 className="text-5xl font-semibold">Walid's Blog</h1>
-      <ul className="flex items-center gap-20 text-lg font-medium">
+    <div className="w-full bg-cyan-700 h-48 flex px-24 lg:px-48 py-10 lg:py-0 flex-col lg:flex-row  items-center justify-between">
+      <h1 className="text-4xl lg:text-5xl font-semibold">Walid's Blog</h1>
+      <ul className="flex items-center gap-10 md:gap-20 text-md md:text-lg font-medium">
         <li>
           <Link to="/">Home</Link>
         </li>

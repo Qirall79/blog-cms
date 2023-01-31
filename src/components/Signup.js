@@ -44,9 +44,9 @@ const Signup = () => {
     <div>
       {response.success && response.user._id ? <Navigate to="/login" /> : ""}
       <Navbar />
-      <div className="w-full px-48 py-24">
+      <div className="w-full px-20 md:px-28 lg:px-48 py-24">
         <form method="post" className="w-full flex-col gap-20">
-          <div className="form-group mb-5 w-2/3 max-w-[700px] flex justify-between items-center">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="first_name">First Name</label>
             <input
               type="text"
@@ -61,7 +61,7 @@ const Signup = () => {
               className="border h-[35px] px-2 py-1 text-sm w-3/4"
             />
           </div>
-          <div className="form-group mb-5 w-2/3 max-w-[700px] flex justify-between items-center">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="last_name">Last Name</label>
             <input
               type="text"
@@ -76,7 +76,7 @@ const Signup = () => {
               className="border h-[35px] px-2 py-1 text-sm w-3/4"
             />
           </div>
-          <div className="form-group mb-5 w-2/3 max-w-[700px] flex justify-between items-center">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="email">Email</label>
             <input
               type="text"
@@ -89,7 +89,7 @@ const Signup = () => {
               className="border h-[35px] px-2 py-1 text-sm w-3/4"
             />
           </div>
-          <div className="form-group mb-5 w-2/3 max-w-[700px] flex justify-between items-center">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -99,7 +99,7 @@ const Signup = () => {
               className="border h-[35px] px-2 py-1 text-sm w-3/4"
             />
           </div>
-          <div className="form-group mb-5 w-2/3 max-w-[700px] flex justify-between items-center">
+          <div className="form-group mb-5 w-1/2 min-w-[400px] flex flex-col gap-3 justify-between">
             <label htmlFor="password_confirmation">Password Confirmation</label>
             <input
               type="password"
