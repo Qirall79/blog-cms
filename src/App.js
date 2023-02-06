@@ -20,6 +20,7 @@ function App() {
         setPosts({
           success: response.data.success,
           posts: response.data.posts,
+          fetched: true,
         });
       })
       .catch((err) => {
@@ -29,7 +30,6 @@ function App() {
   useEffect(() => {
     const getPosts = async () => {
       await fetchPosts();
-      setPosts({ ...posts, fetched: true });
     };
     getPosts();
   }, []);
@@ -41,12 +41,12 @@ function App() {
         className="w-full px-20 md:px-28 lg:px-48 py-24 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-16"
       >
         {posts.fetched
-          ? !posts.posts.length
-            ? "Please wait..."
+          ? posts.posts.length
+            ? posts.posts.map((post) => {
+                return <Post post={post} />;
+              })
             : "There are no posts."
-          : posts.posts.map((post) => {
-              return <Post post={post} />;
-            })}
+          : "Please wait..."}
       </div>
     </div>
   );
