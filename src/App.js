@@ -7,9 +7,13 @@ import Navbar from "./components/Navbar";
 import url from "./apiLink";
 
 function App() {
-  const [posts, setPosts] = useState({ success: false, posts: [] });
+  const [posts, setPosts] = useState({
+    success: false,
+    posts: [],
+    fetched: false,
+  });
 
-  const fetchPosts = () => {
+  const fetchPosts = async () => {
     axios
       .get(url + "/posts")
       .then((response) => {
@@ -23,7 +27,11 @@ function App() {
       });
   };
   useEffect(() => {
-    fetchPosts();
+    const getPosts = async () => {
+      await fetchPosts();
+      setPosts({ ...posts, fetched: true });
+    };
+    getPosts();
   }, []);
   return (
     <div className="App">
@@ -32,10 +40,10 @@ function App() {
         id="posts"
         className="w-full px-20 md:px-28 lg:px-48 py-24 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-16"
       >
-        {!posts.success
+        {posts.fetched
           ? !posts.posts.length
-            ? ""
-            : "There are no posts here"
+            ? "Please wait..."
+            : "There are no posts."
           : posts.posts.map((post) => {
               return <Post post={post} />;
             })}
