@@ -5,12 +5,15 @@ import fetchUser from "../helper/fetchUser";
 const Navbar = () => {
   // Get current user if exists
   const [user, setUser] = useState({
-    isAuthenticated: false,
+    isAuthenticated: true,
     userDetails: null,
   });
 
   useEffect(() => {
-    fetchUser(user, setUser);
+    const getUser = async () => {
+      await fetchUser(user, setUser);
+    };
+    getUser();
   }, []);
 
   if (user.isAuthenticated) {

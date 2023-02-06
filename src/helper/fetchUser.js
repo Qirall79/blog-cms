@@ -1,11 +1,16 @@
 import axios from "axios";
 import url from "../apiLink";
 
-const fetchUser = (user, setUser) => {
+const fetchUser = async (user, setUser) => {
+  if (localStorage.getItem("token") == null) {
+    setUser({ isAuthenticated: false, userDetails: null });
+    return;
+  }
+
   axios
     .get(url + "/user", {
       headers: {
-        Authorization: localStorage.getItem("token"),
+        Authorization: localStorage.getItem("token") || "",
       },
     })
     .then((response) => {

@@ -41,6 +41,7 @@ const Login = () => {
         saveToken(response.data);
       })
       .catch((err) => {
+        console.log(err);
         setResponse(err.response.data);
       });
   };
